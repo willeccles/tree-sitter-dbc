@@ -344,7 +344,7 @@
         "required": true,
         "types": [
           {
-            "type": "unsigned_integer",
+            "type": "byte_order",
             "named": true
           }
         ]
@@ -454,7 +454,7 @@
         "required": true,
         "types": [
           {
-            "type": "unsigned_integer",
+            "type": "value_type",
             "named": true
           }
         ]
@@ -795,6 +795,10 @@
     "named": false
   },
   {
+    "type": "byte_order",
+    "named": true
+  },
+  {
     "type": "c_identifier",
     "named": true
   },
@@ -828,6 +832,10 @@
   },
   {
     "type": "unsigned_integer",
+    "named": true
+  },
+  {
+    "type": "value_type",
     "named": true
   },
   {

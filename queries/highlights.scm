@@ -1,6 +1,8 @@
 (char_string) @string
 (unsigned_integer) @number
 (signed_integer) @number
+(byte_order) @number
+(value_type) @operator
 (double) @number
 (c_identifier) @type
 (keyword) @keyword

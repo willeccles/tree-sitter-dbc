@@ -493,32 +493,16 @@
           "type": "FIELD",
           "name": "byte_order",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "[01]"
-              }
-            },
-            "named": true,
-            "value": "unsigned_integer"
+            "type": "SYMBOL",
+            "name": "byte_order"
           }
         },
         {
           "type": "FIELD",
           "name": "value_type",
           "content": {
-            "type": "ALIAS",
-            "content": {
-              "type": "IMMEDIATE_TOKEN",
-              "content": {
-                "type": "PATTERN",
-                "value": "[+-]"
-              }
-            },
-            "named": true,
-            "value": "unsigned_integer"
+            "type": "SYMBOL",
+            "name": "value_type"
           }
         },
         {
@@ -631,6 +615,20 @@
           "value": "M"
         }
       ]
+    },
+    "byte_order": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[01]"
+      }
+    },
+    "value_type": {
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[+-]"
+      }
     },
     "comment": {
       "type": "SEQ",

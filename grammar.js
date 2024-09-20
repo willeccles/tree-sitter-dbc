@@ -103,8 +103,8 @@ extended_multiplexing
       token.immediate('|'),
       field('size', $.unsigned_integer),
       token.immediate('@'),
-      field('byte_order', alias(token.immediate(/[01]/), $.unsigned_integer)),
-      field('value_type', alias(token.immediate(/[+-]/), $.unsigned_integer)),
+      field('byte_order', $.byte_order),
+      field('value_type', $.value_type),
       '(', field('factor', $.double), ',', field('offset', $.double), ')',
       '[', field('minimum', $.double), '|', field('maximum', $.double), ']',
       field('unit', $.char_string),
@@ -115,6 +115,9 @@ extended_multiplexing
       seq('m', $.unsigned_integer, optional(token.immediate('M'))),
       'M'
     ),
+
+    byte_order: $ => token.immediate(/[01]/),
+    value_type: $ => token.immediate(/[+-]/),
 
     comment: $ => seq('CM_', choice(
       $.char_string,

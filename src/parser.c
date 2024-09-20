@@ -70,16 +70,16 @@ enum ts_symbol_identifiers {
   anon_sym_SG_ = 44,
   anon_sym_PIPE = 45,
   anon_sym_AT = 46,
-  aux_sym_signal_token1 = 47,
-  aux_sym_signal_token2 = 48,
-  anon_sym_LPAREN = 49,
-  anon_sym_RPAREN = 50,
-  anon_sym_LBRACK = 51,
-  anon_sym_PIPE2 = 52,
-  anon_sym_RBRACK = 53,
-  anon_sym_m = 54,
-  anon_sym_M = 55,
-  anon_sym_M2 = 56,
+  anon_sym_LPAREN = 47,
+  anon_sym_RPAREN = 48,
+  anon_sym_LBRACK = 49,
+  anon_sym_PIPE2 = 50,
+  anon_sym_RBRACK = 51,
+  anon_sym_m = 52,
+  anon_sym_M = 53,
+  anon_sym_M2 = 54,
+  sym_byte_order = 55,
+  sym_value_type = 56,
   anon_sym_EV_ = 57,
   anon_sym_SEMI = 58,
   anon_sym_DQUOTE = 59,
@@ -170,8 +170,6 @@ static const char * const ts_symbol_names[] = {
   [anon_sym_SG_] = "SG_",
   [anon_sym_PIPE] = "|",
   [anon_sym_AT] = "@",
-  [aux_sym_signal_token1] = "unsigned_integer",
-  [aux_sym_signal_token2] = "unsigned_integer",
   [anon_sym_LPAREN] = "(",
   [anon_sym_RPAREN] = ")",
   [anon_sym_LBRACK] = "[",
@@ -180,6 +178,8 @@ static const char * const ts_symbol_names[] = {
   [anon_sym_m] = "m",
   [anon_sym_M] = "M",
   [anon_sym_M2] = "M",
+  [sym_byte_order] = "byte_order",
+  [sym_value_type] = "value_type",
   [anon_sym_EV_] = "EV_",
   [anon_sym_SEMI] = ";",
   [anon_sym_DQUOTE] = "\"",
@@ -270,8 +270,6 @@ static const TSSymbol ts_symbol_map[] = {
   [anon_sym_SG_] = anon_sym_SG_,
   [anon_sym_PIPE] = anon_sym_PIPE,
   [anon_sym_AT] = anon_sym_AT,
-  [aux_sym_signal_token1] = sym_unsigned_integer,
-  [aux_sym_signal_token2] = sym_unsigned_integer,
   [anon_sym_LPAREN] = anon_sym_LPAREN,
   [anon_sym_RPAREN] = anon_sym_RPAREN,
   [anon_sym_LBRACK] = anon_sym_LBRACK,
@@ -280,6 +278,8 @@ static const TSSymbol ts_symbol_map[] = {
   [anon_sym_m] = anon_sym_m,
   [anon_sym_M] = anon_sym_M,
   [anon_sym_M2] = anon_sym_M,
+  [sym_byte_order] = sym_byte_order,
+  [sym_value_type] = sym_value_type,
   [anon_sym_EV_] = anon_sym_EV_,
   [anon_sym_SEMI] = anon_sym_SEMI,
   [anon_sym_DQUOTE] = anon_sym_DQUOTE,
@@ -511,14 +511,6 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = false,
   },
-  [aux_sym_signal_token1] = {
-    .visible = true,
-    .named = true,
-  },
-  [aux_sym_signal_token2] = {
-    .visible = true,
-    .named = true,
-  },
   [anon_sym_LPAREN] = {
     .visible = true,
     .named = false,
@@ -550,6 +542,14 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
   [anon_sym_M2] = {
     .visible = true,
     .named = false,
+  },
+  [sym_byte_order] = {
+    .visible = true,
+    .named = true,
+  },
+  [sym_value_type] = {
+    .visible = true,
+    .named = true,
   },
   [anon_sym_EV_] = {
     .visible = true,
@@ -1049,11 +1049,11 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (eof) ADVANCE(265);
       ADVANCE_MAP(
         '"', 394,
-        '(', 384,
-        ')', 385,
+        '(', 380,
+        ')', 381,
         ',', 368,
-        '0', 381,
-        '1', 381,
+        '0', 389,
+        '1', 389,
         ':', 330,
         ';', 393,
         '@', 379,
@@ -1063,16 +1063,16 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
         'F', 84,
         'H', 36,
         'I', 112,
-        'M', 390,
+        'M', 386,
         'N', 148,
         'S', 70,
         'V', 13,
-        '[', 386,
-        ']', 388,
-        'm', 389,
+        '[', 382,
+        ']', 384,
+        'm', 385,
         '|', 378,
-        '+', 383,
-        '-', 383,
+        '+', 391,
+        '-', 391,
         '2', 267,
         '3', 267,
       );
@@ -1091,10 +1091,10 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
         'N', 150,
         'S', 74,
         'V', 12,
-        '+', 382,
-        '-', 382,
-        '0', 380,
-        '1', 380,
+        '+', 390,
+        '-', 390,
+        '0', 388,
+        '1', 388,
       );
       if (('\t' <= lookahead && lookahead <= '\f') ||
           lookahead == ' ') SKIP(2);
@@ -1135,11 +1135,11 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
         'C', 10,
         'E', 113,
         'F', 83,
-        'M', 390,
+        'M', 386,
         'N', 150,
         'S', 74,
         'V', 12,
-        '|', 387,
+        '|', 383,
         '+', 258,
         '-', 258,
       );
@@ -1157,7 +1157,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
         'N', 150,
         'S', 74,
         'V', 12,
-        '|', 387,
+        '|', 383,
         '+', 258,
         '-', 258,
       );
@@ -2002,8 +2002,8 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (eof) ADVANCE(265);
       ADVANCE_MAP(
         '"', 394,
-        '(', 384,
-        ')', 385,
+        '(', 380,
+        ')', 381,
         ',', 368,
         ':', 330,
         ';', 393,
@@ -2013,14 +2013,14 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
         'F', 84,
         'H', 36,
         'I', 112,
-        'M', 391,
+        'M', 387,
         'N', 148,
         'S', 70,
         'V', 13,
-        '[', 386,
-        ']', 388,
-        'm', 389,
-        '|', 387,
+        '[', 382,
+        ']', 384,
+        'm', 385,
+        '|', 383,
         '+', 256,
         '-', 256,
       );
@@ -2040,11 +2040,11 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
         'F', 90,
         'H', 36,
         'I', 112,
-        'M', 391,
+        'M', 387,
         'N', 149,
         'S', 79,
         'V', 41,
-        'm', 389,
+        'm', 385,
         '|', 378,
         '+', 256,
         '-', 256,
@@ -2064,11 +2064,11 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
         'F', 90,
         'H', 36,
         'I', 112,
-        'M', 391,
+        'M', 387,
         'N', 149,
         'S', 79,
         'V', 41,
-        'm', 389,
+        'm', 385,
         '+', 256,
         '-', 256,
       );
@@ -2750,43 +2750,43 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(anon_sym_AT);
       END_STATE();
     case 380:
-      ACCEPT_TOKEN(aux_sym_signal_token1);
+      ACCEPT_TOKEN(anon_sym_LPAREN);
       END_STATE();
     case 381:
-      ACCEPT_TOKEN(aux_sym_signal_token1);
+      ACCEPT_TOKEN(anon_sym_RPAREN);
+      END_STATE();
+    case 382:
+      ACCEPT_TOKEN(anon_sym_LBRACK);
+      END_STATE();
+    case 383:
+      ACCEPT_TOKEN(anon_sym_PIPE2);
+      END_STATE();
+    case 384:
+      ACCEPT_TOKEN(anon_sym_RBRACK);
+      END_STATE();
+    case 385:
+      ACCEPT_TOKEN(anon_sym_m);
+      END_STATE();
+    case 386:
+      ACCEPT_TOKEN(anon_sym_M);
+      END_STATE();
+    case 387:
+      ACCEPT_TOKEN(anon_sym_M2);
+      END_STATE();
+    case 388:
+      ACCEPT_TOKEN(sym_byte_order);
+      END_STATE();
+    case 389:
+      ACCEPT_TOKEN(sym_byte_order);
       if (lookahead == '.') ADVANCE(257);
       if (('0' <= lookahead && lookahead <= '9')) ADVANCE(267);
       END_STATE();
-    case 382:
-      ACCEPT_TOKEN(aux_sym_signal_token2);
-      END_STATE();
-    case 383:
-      ACCEPT_TOKEN(aux_sym_signal_token2);
-      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(268);
-      END_STATE();
-    case 384:
-      ACCEPT_TOKEN(anon_sym_LPAREN);
-      END_STATE();
-    case 385:
-      ACCEPT_TOKEN(anon_sym_RPAREN);
-      END_STATE();
-    case 386:
-      ACCEPT_TOKEN(anon_sym_LBRACK);
-      END_STATE();
-    case 387:
-      ACCEPT_TOKEN(anon_sym_PIPE2);
-      END_STATE();
-    case 388:
-      ACCEPT_TOKEN(anon_sym_RBRACK);
-      END_STATE();
-    case 389:
-      ACCEPT_TOKEN(anon_sym_m);
-      END_STATE();
     case 390:
-      ACCEPT_TOKEN(anon_sym_M);
+      ACCEPT_TOKEN(sym_value_type);
       END_STATE();
     case 391:
-      ACCEPT_TOKEN(anon_sym_M2);
+      ACCEPT_TOKEN(sym_value_type);
+      if (('0' <= lookahead && lookahead <= '9')) ADVANCE(268);
       END_STATE();
     case 392:
       ACCEPT_TOKEN(anon_sym_EV_);
@@ -3067,8 +3067,6 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_SG_] = ACTIONS(1),
     [anon_sym_PIPE] = ACTIONS(1),
     [anon_sym_AT] = ACTIONS(1),
-    [aux_sym_signal_token1] = ACTIONS(1),
-    [aux_sym_signal_token2] = ACTIONS(1),
     [anon_sym_LPAREN] = ACTIONS(1),
     [anon_sym_RPAREN] = ACTIONS(1),
     [anon_sym_LBRACK] = ACTIONS(1),
@@ -3077,6 +3075,8 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_m] = ACTIONS(1),
     [anon_sym_M] = ACTIONS(1),
     [anon_sym_M2] = ACTIONS(1),
+    [sym_byte_order] = ACTIONS(1),
+    [sym_value_type] = ACTIONS(1),
     [anon_sym_EV_] = ACTIONS(1),
     [anon_sym_SEMI] = ACTIONS(1),
     [anon_sym_DQUOTE] = ACTIONS(1),
@@ -4825,22 +4825,22 @@ static const uint16_t ts_small_parse_table[] = {
       sym_unsigned_integer,
   [2293] = 1,
     ACTIONS(376), 1,
-      aux_sym_signal_token1,
+      sym_byte_order,
   [2297] = 1,
     ACTIONS(378), 1,
       anon_sym_AT,
   [2301] = 1,
     ACTIONS(380), 1,
-      aux_sym_signal_token2,
+      sym_value_type,
   [2305] = 1,
     ACTIONS(382), 1,
-      aux_sym_signal_token1,
+      sym_byte_order,
   [2309] = 1,
     ACTIONS(384), 1,
       anon_sym_LPAREN,
   [2313] = 1,
     ACTIONS(386), 1,
-      aux_sym_signal_token2,
+      sym_value_type,
   [2317] = 1,
     ACTIONS(388), 1,
       sym_double,
