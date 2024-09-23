@@ -15,6 +15,7 @@ module.exports = grammar({
       repeat($.attribute_definition),
       repeat($.attribute_default),
       repeat($.attribute_value_for_object),
+      repeat($.value_descriptions_for_signal),
       repeat($.signal_extended_value_type_list)
                           /*
                           * attribute_definitions
@@ -198,6 +199,19 @@ extended_multiplexing
       ';'
     ),
 
-    signal_extended_value_type: $ => /[1-3]/
+    signal_extended_value_type: $ => /[1-3]/,
+
+    value_descriptions_for_signal: $ => seq(
+      'VAL_',
+      field('message_id', $.unsigned_integer),
+      field('signal_name', $.c_identifier),
+      repeat($.value_description),
+      ';'
+    ),
+
+    value_description: $ => seq(
+      field('value', $.unsigned_integer),
+      field('description', $.char_string)
+    )
   }
 });

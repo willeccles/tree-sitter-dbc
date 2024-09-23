@@ -546,6 +546,10 @@
           "named": true
         },
         {
+          "type": "value_descriptions_for_signal",
+          "named": true
+        },
+        {
           "type": "version",
           "named": true
         }
@@ -562,6 +566,68 @@
       "types": [
         {
           "type": "c_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "value_description",
+    "named": true,
+    "fields": {
+      "description": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "char_string",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "unsigned_integer",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "value_descriptions_for_signal",
+    "named": true,
+    "fields": {
+      "message_id": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "unsigned_integer",
+            "named": true
+          }
+        ]
+      },
+      "signal_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "c_identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "value_description",
           "named": true
         }
       ]

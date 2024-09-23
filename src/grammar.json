@@ -84,6 +84,13 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
+            "name": "value_descriptions_for_signal"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
             "name": "signal_extended_value_type_list"
           }
         }
@@ -1098,6 +1105,63 @@
     "signal_extended_value_type": {
       "type": "PATTERN",
       "value": "[1-3]"
+    },
+    "value_descriptions_for_signal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "VAL_"
+        },
+        {
+          "type": "FIELD",
+          "name": "message_id",
+          "content": {
+            "type": "SYMBOL",
+            "name": "unsigned_integer"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "signal_name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "c_identifier"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "value_description"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ";"
+        }
+      ]
+    },
+    "value_description": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "value",
+          "content": {
+            "type": "SYMBOL",
+            "name": "unsigned_integer"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "description",
+          "content": {
+            "type": "SYMBOL",
+            "name": "char_string"
+          }
+        }
+      ]
     }
   },
   "extras": [
